@@ -25,7 +25,7 @@ class StoreUpdateCategoryFormRequest extends FormRequest
     {
         return [
             'title'         => "required|min:3|max:60|unique:categories",
-            'url'           => "required|min:3|max:60|unique:categories",
+//            'url'           => "required|min:3|max:60|unique:categories",
             'description'   => "max:2000"
         ];
     }

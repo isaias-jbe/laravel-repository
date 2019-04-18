@@ -89,8 +89,8 @@
                     </tr>
                 </tfoot>
               </table>
-              @if (isset($data))
-                {!! $categories->appends($data)->links() !!}
+              @if (isset($filters))
+                {!! $categories->appends($filters)->links() !!}
               @else
                 {!! $categories->links() !!}
               @endif              

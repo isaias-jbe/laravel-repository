@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use App\Models\Product;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductFormRequest;
 use App\Http\Requests\UpdateProductFormRequest;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
 
-    protected $product;
+    protected $repository;
 
     /**
      * ProductController constructor.
      * @param Product $product
      */
-    public function __construct(Product $product)
+    public function __construct(ProductRepositoryInterface $repository)
     {
-        $this->product = $product;
+        $this->repository = $repository;
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->product->with('category')->paginate();
+        $products = $this->repository->orderBy('id')->relationships('category')->paginate();
 
         return view('admin.products.index', compact('products'));
     }
@@ -44,7 +44,7 @@ class ProductController extends Controller
     {
         $title      = 'Cadastro de Produto';
 
-        return view('admin.products.create', compact('title', 'categories'));
+        return view('admin.products.create', compact('title'));
     }
 
     /**
@@ -55,7 +55,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductFormRequest $request)
     {
-        $this->product->create($request->all());
+        $this->repository->store($request->all());
+
         return redirect()->route('products.index')->withSuccess('Produto cadastrado com sucesso!');
     }
 
@@ -67,7 +68,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = $this->product->with('category')->find($id);
+        $product = $this->repository->findWhereFirst('id', $id);
 
         if (!$product)
             return redirect()->back();
@@ -84,7 +85,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $title      = 'Editar Produto';
-        $product    = $this->product->find($id);
+        $product    = $this->repository->findById($id);
 
         if (!$product)
             return redirect()->back();
@@ -101,12 +102,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductFormRequest $request, $id)
     {
-        $product = $this->product->find($id);
-
-        if (!$product)
-            return redirect()->back();
-
-        $product->update($request->all());
+        $this->repository->update($id, $request->all());
 
         return redirect()->route('products.index')->withSuccess('Produto atualizado com sucesso!');
     }
@@ -119,35 +115,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->product->find($id)->delete();
+        $this->repository->destroy($id);
 
         return redirect()->route('products.index')->withSuccess('Produto deletado com sucesso!');
     }
 
     public function search(Request $request)
     {
-        $filters = $request->except('_token');
-
-        $products = $this->product
-            ->with('category')
-            ->where(function ($query) use ($request) {
-
-                if ($request->name){
-                    $filter = $request->name;
-                    $query->where(function ($querySub) use ($filter) {
-                        $querySub->where('name', 'LIKE', "%{$filter}%")
-                            ->orWhere('description', 'LIKE', "%{$filter}%");
-                    });
-                }
-
-                if ($request->price){
-                    $query->where('price', $request->price);
-                }
-
-                if ($request->category){
-                    $query->where('category_id', $request->category);
-                }
-            })->paginate();
+        $filters    = $request->except('_token');
+        $products   = $this->repository->search($request);
 
         return view('admin.products.index', compact('products', 'filters'));
     }
