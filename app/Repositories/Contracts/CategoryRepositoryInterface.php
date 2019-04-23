@@ -13,4 +13,6 @@ use Illuminate\Http\Request;
 interface CategoryRepositoryInterface
 {
     public function search(Request $request);
+    public function productsByCategoryId(int $id);
+    public function countProductsByCategoryId(int $id);
 }

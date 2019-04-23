@@ -1,17 +1,17 @@
 <?php
 
-Route::any('admin/products/search', 'Admin\ProductController@search')->name('products.search');
-Route::resource('admin/products', 'Admin\ProductController');
+Auth::routes(['register' => false]);
 
-Route::get('admin', function (){})->name('admin');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+    Route::any('products/search', 'ProductController@search')->name('products.search');
+    Route::resource('products', 'ProductController');
 
-Route::any('admin/categories/search', 'Admin\CategoryController@search')->name('categories.search');
-Route::resource('admin/categories', 'Admin\CategoryController');
+    Route::any('categories/search', 'CategoryController@search')->name('categories.search');
+    Route::resource('categories', 'CategoryController');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/', 'DashboardController@index')->name('admin');
 });
 
-Auth::routes();
+Route::get('/', 'Site\SiteController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

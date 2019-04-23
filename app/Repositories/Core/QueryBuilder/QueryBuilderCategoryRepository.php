@@ -39,6 +39,24 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function productsByCategoryId(int $id)
+    {
+        return $this->db->table('products')->where('category_id', $id)->get();
+    }
+
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function countProductsByCategoryId(int $id)
+    {
+        return $this->db->table('products')->where('category_id', $id)->count();
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */

@@ -115,19 +115,34 @@ return [
 //            'can'  => 'manage-blog',
 //        ],
         [
+            'text'        => 'Dashboard',
+            'url'         => 'admin',
+            'icon'        => 'tachometer',
+            'label'       => 5,
+            'label_color' => 'primary',
+        ],
+        [
             'text'        => 'Categorias',
             'url'         => 'admin/categories',
-            'icon'        => 'file',
+            'icon'        => 'object-group',
             'label'       => 10,
             'label_color' => 'success',
         ],
         [
             'text'        => 'Produtos',
             'url'         => 'admin/products',
-            'icon'        => 'file',
+            'icon'        => 'tasks',
             'label'       => 35,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Usuários',
+            'url'         => 'admin/users',
+            'icon'        => 'users',
+            'label'       => 35,
+            'label_color' => 'success',
+        ],
+
 //        'ACCOUNT SETTINGS',
 //        [
 //            'text' => 'Profile',
