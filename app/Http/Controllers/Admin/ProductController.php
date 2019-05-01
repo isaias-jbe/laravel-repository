@@ -90,7 +90,7 @@ class ProductController extends Controller
         if (!$product)
             return redirect()->back();
 
-        return view('admin.products.create', compact('title', 'product'));
+        return view('admin.products.edit', compact('title', 'product'));
     }
 
     /**

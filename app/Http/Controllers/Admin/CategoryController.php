@@ -90,7 +90,7 @@ class CategoryController extends Controller
         if(!$category)
             return redirect()->back();
 
-        return view('admin.categories.create', compact('category', 'title'));
+        return view('admin.categories.edit', compact('category', 'title'));
     }
 
     /**
