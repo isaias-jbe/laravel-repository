@@ -7,7 +7,7 @@
         Detalhes da categoria
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('categories.index') }}"><i class="fa fa-list"></i>Categorias</a></li>
         <li class="active">Detalhes</li>
     </ol>
@@ -23,9 +23,9 @@
         <!-- /.box-header -->
         <div class="box-body">
             <p><b>Id:</b> {{ $category->id }}</p>
-            <p><b>Titulo:</b> {{ $category->title }}</p>
-            <p><b>Url:</b> {{ $category->url }}</p>
+            <p><b>Nome:</b> {{ $category->name }}</p>
             <p><b>Descrição:</b> {{ $category->description }}</p>
+            <p><b>Cadastrada em:</b> {{ $category->created_at }}</p>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

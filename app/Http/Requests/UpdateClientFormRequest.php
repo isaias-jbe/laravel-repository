@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateCategoryFormRequest extends FormRequest
+class UpdateClientFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,12 @@ class StoreUpdateCategoryFormRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->segment(3);
+
         return [
-            'title'         => "required|min:3|max:60|unique:categories",
-//            'url'           => "required|min:3|max:60|unique:categories",
-            'description'   => "max:2000"
+            'name'      => 'required|min:3|max:60',
+            'email'     => "required|min:5|max:60|unique:clients,email,{$id},id",
+            'phone'     => 'required',
         ];
     }
 }

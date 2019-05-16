@@ -24,25 +24,43 @@ class EloquentCategoryRepository extends BaseEloquentRepository implements Categ
         return Category::class;
     }
 
+//    /**
+//     * @param array $data
+//     * @return bool
+//     */
+//    public function store(array $data)
+//    {
+//        $data['url'] = kebab_case($data['title']);
+//        return $this->entity->insert($data);
+//    }
+//
+//    /**
+//     * @param int $id
+//     * @param array $data
+//     * @return int
+//     */
+//    public function update(int $id, array $data)
+//    {
+//        $data['url'] = kebab_case($data['title']);
+//        return $this->entity->where('id', $id)->update($data);
+//    }
+
     /**
-     * @param array $data
-     * @return bool
+     * @param int $id
+     * @return \Illuminate\Support\Collection
      */
-    public function store(array $data)
+    public function productsByCategoryId(int $id)
     {
-        $data['url'] = kebab_case($data['title']);
-        return $this->entity->insert($data);
+        return $this->entity->where('category_id', $id)->get();
     }
 
     /**
      * @param int $id
-     * @param array $data
      * @return int
      */
-    public function update(int $id, array $data)
+    public function countProductsByCategoryId(int $id)
     {
-        $data['url'] = kebab_case($data['title']);
-        return $this->entity->where('id', $id)->update($data);
+        return $this->entity->where('category_id', $id)->count();
     }
 
     /**
@@ -53,12 +71,8 @@ class EloquentCategoryRepository extends BaseEloquentRepository implements Categ
     {
         return $this->entity->where( function ($query) use ($request) {
 
-                if( isset($request->title) ){
-                    $query->where('title', 'LIKE', "%{$request->title}%");
-                }
-
-                if( isset($request->url) ){
-                    $query->orWhere('url', $request->url);
+                if( isset($request->name) ){
+                    $query->where('name', 'LIKE', "%{$request->name}%");
                 }
 
                 if( isset($request->description) ){

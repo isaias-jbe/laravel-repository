@@ -8,18 +8,45 @@
 ?>
 @csrf
 <div class="box-body">
-    <div class="form-group">
-        <label for="title">Titulo</label>
-        <input type="text" class="form-control" id="title" name="title" value="{{ $category->title ?? old('title') }}">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
+                <label for="name">Nome da Categoria:</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-gear"></i>
+                    </div>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $category->name ?? old('name') }}">
+                </div>
+                @if($errors->has('name'))
+                    <span class="help-block">
+                   <strong>{{ $errors->first('name') }}</strong>
+               </span>
+                @endif
+            </div>
+        </div>
     </div>
-    {{--<div class="form-group">--}}
-    {{--<label for="url">URL</label>--}}
-    {{--<input type="text" class="form-control" id="url" name="url" value="{{ $category->url ?? old('url') }}">--}}
-    {{--</div>--}}
-    <div class="form-group">
-        <label for="description">Descrição</label>
-        <textarea class="form-control" name="description" id="description" cols="30" rows="5">{{ $category->description ?? old('description') }}</textarea>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group has-feedback {{ $errors->has('description') ? 'has-error' : '' }}">
+                <label for="description">Descrição da Categoria</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-sort-alpha-asc"></i>
+                    </div>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="5">{{ $category->description ?? old('description') }}</textarea>
+                </div>
+                @if($errors->has('description'))
+                    <span class="help-block">
+                   <strong>{{ $errors->first('description') }}</strong>
+               </span>
+                @endif
+            </div>
+        </div>
     </div>
+
 </div>
 <!-- /.box-body -->
 

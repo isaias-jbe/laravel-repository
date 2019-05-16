@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -118,30 +118,62 @@ return [
             'text'        => 'Dashboard',
             'url'         => 'admin',
             'icon'        => 'tachometer',
-            'label'       => 5,
-            'label_color' => 'primary',
+//            'label'       => 5,
+//            'label_color' => 'primary',
         ],
         [
+            'text'        => 'Relatórios',
+            'url'         => '#',
+            'icon'        => 'area-chart',
+            'submenu'     =>
+                [
+                    [
+                        'text' => 'Mensal',
+                        'url'  => 'admin/reports/months',
+                        'icon' => 'line-chart',
+                    ],
+                    [
+                        'text' => 'Anual',
+                        'url'  => 'admin/reports/years',
+                        'icon' => 'bar-chart',
+                    ],
+                    [
+                        'text' => 'Vue-js',
+                        'url'  => 'admin/reports/vue',
+                        'icon' => 'area-chart',
+                    ],
+                ],
+        ],
+        [
+            'id'          => 'categories',
             'text'        => 'Categorias',
             'url'         => 'admin/categories',
             'icon'        => 'object-group',
-            'label'       => 10,
-            'label_color' => 'success',
+//            'label'       => 10,
+//            'label_color' => 'success',
         ],
         [
+            'id'          => 'products',
             'text'        => 'Produtos',
             'url'         => 'admin/products',
             'icon'        => 'tasks',
-            'label'       => 35,
-            'label_color' => 'success',
+//            'label'       => 35,
+//            'label_color' => 'success',
         ],
         [
+            'id'          => 'users',
             'text'        => 'Usuários',
             'url'         => 'admin/users',
-            'icon'        => 'users',
-            'label'       => 35,
-            'label_color' => 'success',
+            'icon'        => 'user',
+//            'label'       => 35,
+//            'label_color' => 'success',
         ],
+        [
+            'id'          => 'clients',
+            'text'        => 'Clientes',
+            'url'         => 'admin/clients',
+            'icon'        => 'users',
+        ]
 
 //        'ACCOUNT SETTINGS',
 //        [

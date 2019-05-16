@@ -40,8 +40,8 @@ class EloquentProductRepository extends BaseEloquentRepository implements Produc
                     });
                 }
 
-                if ( isset($request->price) && !empty($request->price) ){
-                    $query->where('price', $request->price);
+                if ( isset($request->sale_price) && !empty($request->sale_price) ){
+                    $query->where('sale_price', $request->sale_price);
                 }
 
                 if ( isset($request->category) && !empty($request->category) ){

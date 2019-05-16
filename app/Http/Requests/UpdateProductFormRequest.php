@@ -27,8 +27,8 @@ class UpdateProductFormRequest extends FormRequest
 
         return [
             'name'          => "required|min:3|max:150|unique:products,name,{$id},id",
-            'url'           => "required|min:3|max:100|unique:products,url,{$id},id",
-            'price'         => "required|numeric",
+            'cost_price'    => "required",
+            'sale_price'    => "required",
             'description'   => "max:3000",
             "category_id"   => "required|exists:categories,id"
         ];

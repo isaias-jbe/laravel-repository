@@ -5,7 +5,7 @@
 @section('content_header')
     <h1>Editar Produto</h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('products.index') }}"><i class="fa fa-list"></i>Produtos</a></li>
         <li class="active">Editar</li>
     </ol>
@@ -19,8 +19,7 @@
                     <h3 class="box-title">{{ $title }} {{ $product->title ?? "" }}</h3>
                 </div>
                 <!-- /.box-header -->
-               
-                @include('admin.includes.alerts')
+
                 <form role="form" action="{{ route('products.update', $product->id) }}" method="POST">
                     @method('PUT')
                     @includeIf('admin.products.partials.form')

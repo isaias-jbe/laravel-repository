@@ -17,26 +17,24 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
 {
     protected $table = 'categories';
 
-    /**
-     * @param array $data
-     * @return bool
-     */
-    public function store(array $data)
-    {
-        $data['url'] = kebab_case($data['title']);
-        return $this->db->table($this->tb)->insert($data);
-    }
-
-    /**
-     * @param int $id
-     * @param array $data
-     * @return int
-     */
-    public function update(int $id, array $data)
-    {
-        $data['url'] = kebab_case($data['title']);
-        return $this->db->table($this->tb)->where('id', $id)->update($data);
-    }
+//    /**
+//     * @param array $data
+//     * @return bool
+//     */
+//    public function store(array $data)
+//    {
+//        return $this->db->table($this->tb)->insert($data);
+//    }
+//
+//    /**
+//     * @param int $id
+//     * @param array $data
+//     * @return int
+//     */
+//    public function update(int $id, array $data)
+//    {
+//        return $this->db->table($this->tb)->where('id', $id)->update($data);
+//    }
 
     /**
      * @param int $id
@@ -64,12 +62,8 @@ class QueryBuilderCategoryRepository extends BaseQueryBuilderRepository implemen
     {
         return $this->db->table($this->tb)->where( function ($query) use ($request) {
 
-            if( isset($request->title) ){
-                $query->where('title', 'LIKE', "%{$request->title}%");
-            }
-
-            if( isset($request->url) ){
-                $query->orWhere('url', $request->url);
+            if( isset($request->name) ){
+                $query->where('name', 'LIKE', "%{$request->name}%");
             }
 
             if( isset($request->description) ){

@@ -42,7 +42,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $title      = 'Cadastro de Produto';
+        $title = 'Cadastro de Produto';
 
         return view('admin.products.create', compact('title'));
     }

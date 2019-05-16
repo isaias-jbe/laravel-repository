@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUpdateCategoryFormRequest;
+use App\Http\Requests\StoreCategoryFormRequest;
 use App\Http\Requests\UpdateCategoryFormRequest;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Http\Controllers\Controller;
@@ -40,6 +40,7 @@ class CategoryController extends Controller
     public function create()
     {
         $title = "Cadastro de Categoria";
+
         return view('admin.categories.create', compact('title'));
     }
 
@@ -49,11 +50,10 @@ class CategoryController extends Controller
      * @param  App\Http\Requests\StoreUpdateCategoryFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateCategoryFormRequest $request)
+    public function store(StoreCategoryFormRequest $request)
     {
         $this->repository->store([
-            'title'         => $request->title,
-//            'url'           => $request->url,
+            'name'          => $request->name,
             'description'   => $request->description
         ]);
 
@@ -103,7 +103,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryFormRequest $request, $id)
     {
         $this->repository->update($id, [
-                    'title'         => $request->title,
+                    'name'          => $request->name,
                     'description'   => $request->description
                 ]);
 

@@ -26,9 +26,8 @@ class UpdateCategoryFormRequest extends FormRequest
         $id = $this->segment(3);
 
         return [
-            'title'         => "required|min:3|max:60|unique:categories,title,{$id},id",
-//            'url'           => "required|min:3|max:60|unique:categories,url,{$id},id",
-            'description'   => "max:2000"
+            'name'          => "required|min:3|max:60|unique:categories,name,{$id},id",
+            'description'   => "required|min:5|max:2000"
         ];
     }
 }
